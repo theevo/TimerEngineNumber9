@@ -18,26 +18,46 @@ final class TimerEngineNumber9Tests: XCTestCase {
         XCTAssertEqual(duration, 3)
     }
     
-    func test_Timer_canStart() {
-        var timer = TENTimer(3)
-        timer.start()
+    func test_Timer_canStart() async {
+        var timer = TENTimer(1)
+        await timer.start()
         
         let didStart = timer.didStart
         
         XCTAssertEqual(didStart, true)
     }
+    
+    func test_Timer_canCountdownFrom1Second() async {
+        var timer = TENTimer(1)
+
+        await timer.start()
+
+        XCTAssertEqual(timer.didFinish, true)
+    }
 
 }
 
 struct TENTimer {
+    /// duration in seconds
     public var duration: UInt
     public var didStart: Bool = false
+    public var didFinish: Bool = false
+    
+    var nanosDuration: UInt64 {
+        UInt64(duration * 1_000_000_000)
+    }
     
     public init(_ duration: UInt) {
         self.duration = duration
     }
     
-    public mutating func start() {
-        didStart = true
+    public mutating func start() async {
+        do {
+            try await Task.sleep(nanoseconds: nanosDuration)
+            didStart = true
+            didFinish = true
+        } catch {
+            print(error)
+        }
     }
 }
