@@ -19,45 +19,64 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_Timer_canStart() async {
-        var timer = TENTimer(1)
-        await timer.start()
-        
-        let didStart = timer.didStart
-        
-        XCTAssertEqual(didStart, true)
+        let timer = TENTimer(1)
+        timer.start()
+        XCTAssertEqual(timer.didStart, true)
     }
     
     func test_Timer_canCountdownFrom1Second() async {
-        var timer = TENTimer(1)
+        let timer = TENTimer(1)
 
-        await timer.start()
-
-        XCTAssertEqual(timer.didFinish, true)
+        timer.start()
+        
+        let exp = expectation(description: "Test after 1 second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertEqual(timer.didFinish, true)
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
 
 }
 
-struct TENTimer {
+class TENTimer {
     /// duration in seconds
     public var duration: UInt
-    public var didStart: Bool = false
-    public var didFinish: Bool = false
+    public var state: State = .notStarted
     
-    var nanosDuration: UInt64 {
-        UInt64(duration * 1_000_000_000)
+    public var didStart: Bool {
+        state == .started
     }
+    public var didFinish: Bool {
+        state == .finished
+    }
+    
+    var doubleDuration: Double {
+        Double(duration)
+    }
+    
+    var timer: Timer?
     
     public init(_ duration: UInt) {
         self.duration = duration
     }
     
-    public mutating func start() async {
-        do {
-            try await Task.sleep(nanoseconds: nanosDuration)
-            didStart = true
-            didFinish = true
-        } catch {
-            print(error)
-        }
+    public func start() {
+        state = .started
+        timer = Timer.scheduledTimer(timeInterval: doubleDuration, target: self, selector: #selector(timerFinished), userInfo: nil, repeats: false)
+    }
+    
+    @objc func timerFinished() {
+        state = .finished
+        timer?.invalidate()
+    }
+}
+
+extension TENTimer {
+    enum State {
+        case notStarted
+        case started
+        case finished
     }
 }
