@@ -17,13 +17,27 @@ final class TimerEngineNumber9Tests: XCTestCase {
         
         XCTAssertEqual(duration, 3)
     }
+    
+    func test_Timer_canStart() {
+        var timer = TENTimer(3)
+        timer.start()
+        
+        let didStart = timer.didStart
+        
+        XCTAssertEqual(didStart, true)
+    }
 
 }
 
 struct TENTimer {
     public var duration: UInt
+    public var didStart: Bool = false
     
     public init(_ duration: UInt) {
         self.duration = duration
+    }
+    
+    public mutating func start() {
+        didStart = true
     }
 }
