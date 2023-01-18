@@ -69,6 +69,21 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
+        let timer = TENTimer(2)
+        timer.start()
+        
+        let exp = expectation(description: "Test after 1 second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1)
+        if result == XCTWaiter.Result.timedOut {
+            timer.pause()
+            XCTAssertEqual(timer.state, .paused)
+            XCTAssertEqual(timer.timeRemaining, 1)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+    
     // MARK: - Helpers
     
     func build1SecondTimerAndStartIt() -> TENTimer {
@@ -82,6 +97,7 @@ class TENTimer {
     /// duration in seconds
     public var duration: UInt
     public var state: State = .notStarted
+    public var timeRemaining: UInt = 1
     
     var doubleDuration: Double {
         Double(duration)
