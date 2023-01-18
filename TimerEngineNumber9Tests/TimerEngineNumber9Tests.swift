@@ -10,7 +10,7 @@ import XCTest
 
 final class TimerEngineNumber9Tests: XCTestCase {
 
-    func test_Timer_canSet3SecondDuration() throws {
+    func test_canSet3SecondTimer() throws {
         let timer = TENTimer(3)
         
         let duration = timer.duration
@@ -18,13 +18,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
         XCTAssertEqual(duration, 3)
     }
     
-    func test_Timer_entersStartedStateWhenTimerStarted() {
-        let timer = build1SecondTimerAndStartIt()
+    func test_start1SecondTimer_entersStartedState() {
+        let timer = startTimer()
         XCTAssertEqual(timer.state, .started)
     }
     
-    func test_Timer_completesCountdownFrom1Second() {
-        let timer = build1SecondTimerAndStartIt()
+    func test_start1SecondTimer_completesCountdownFrom1Second() {
+        let timer = startTimer()
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -35,12 +35,12 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_Timer_canPauseAfter1SecondAfterValidStart() {
+    func test_start2SecondTimer_canPauseAfter1Second() {
         let timer = TENTimer(2)
         timer.start()
         
         let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.0)
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
         if result == XCTWaiter.Result.timedOut {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
@@ -49,15 +49,14 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_Timer_cannotPauseIfNotStarted() {
+    func test_start1SecondTimer_cannotPauseIfNotStarted() {
         let timer = TENTimer(1)
         timer.pause()
         XCTAssertNotEqual(timer.state, .paused, "Timer has not started. It should not be able to enter a paused state.")
     }
     
-    func test_Timer_cannotPauseIfFinished() {
-        let timer = TENTimer(1)
-        timer.start()
+    func test_start1SecondTimer_cannotPauseIfFinished() {
+        let timer = startTimer(1)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -70,8 +69,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
-        let timer = TENTimer(2)
-        timer.start()
+        let timer = startTimer(2)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1)
@@ -84,9 +82,8 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondRemains() {
-        let timer = TENTimer(3)
-        timer.start()
+    func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
+        let timer = startTimer(3)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1)
@@ -101,8 +98,8 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     // MARK: - Helpers
     
-    func build1SecondTimerAndStartIt() -> TENTimer {
-        let timer = TENTimer(1)
+    func startTimer(_ seconds: UInt = 1) -> TENTimer {
+        let timer = TENTimer(seconds)
         timer.start()
         return timer
     }
