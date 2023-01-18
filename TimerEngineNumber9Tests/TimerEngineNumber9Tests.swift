@@ -129,7 +129,7 @@ class TENTimer {
     
     public func start() {
         state = .started
-        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
+        tick()
     }
     
     public func pause() {
@@ -140,16 +140,18 @@ class TENTimer {
         state = .paused
     }
     
+    private func tick() {
+        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
+    }
+    
     @objc func tock() {
         timeRemaining -= 1
         ticker?.invalidate()
         
-        // if timeRemaining is zero, set finished state
         if timeRemaining == 0 {
             state = .finished
         } else {
-            // else decrement timeRemaining, and keep ticking
-            ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
+            tick()
         }
     }
 }
