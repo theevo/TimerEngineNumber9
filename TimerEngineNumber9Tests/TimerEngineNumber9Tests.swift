@@ -84,6 +84,21 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondRemains() {
+        let timer = TENTimer(3)
+        timer.start()
+        
+        let exp = expectation(description: "Test after 1 second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1)
+        if result == XCTWaiter.Result.timedOut {
+            timer.pause()
+            XCTAssertEqual(timer.state, .paused)
+            XCTAssertEqual(timer.timeRemaining, 2)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+    
     // MARK: - Helpers
     
     func build1SecondTimerAndStartIt() -> TENTimer {
@@ -95,36 +110,47 @@ final class TimerEngineNumber9Tests: XCTestCase {
 
 class TENTimer {
     /// duration in seconds
-    public var duration: UInt
+    public let duration: UInt
     public var state: State = .notStarted
-    public var timeRemaining: UInt = 1
+    public var timeRemaining: UInt
     
     var doubleDuration: Double {
         Double(duration)
     }
     
-    var timer: Timer?
+    var ticker: Timer?
+    
+    private let oneSecond: Double = 1.0
     
     public init(_ duration: UInt) {
         self.duration = duration
+        self.timeRemaining = duration
     }
     
     public func start() {
         state = .started
-        timer = Timer.scheduledTimer(timeInterval: doubleDuration, target: self, selector: #selector(timerFinished), userInfo: nil, repeats: false)
+        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
     }
     
     public func pause() {
         guard state == .started else { return }
         
-        timer?.invalidate()
+        ticker?.invalidate()
         
         state = .paused
     }
     
-    @objc func timerFinished() {
-        state = .finished
-        timer?.invalidate()
+    @objc func tock() {
+        timeRemaining -= 1
+        ticker?.invalidate()
+        
+        // if timeRemaining is zero, set finished state
+        if timeRemaining == 0 {
+            state = .finished
+        } else {
+            // else decrement timeRemaining, and keep ticking
+            ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
+        }
     }
 }
 
