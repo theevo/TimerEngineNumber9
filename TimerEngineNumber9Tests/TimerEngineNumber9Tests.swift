@@ -109,18 +109,22 @@ final class TimerEngineNumber9Tests: XCTestCase {
 }
 
 class TENTimer {
+    
+    // MARK: - Public Properties
+    
     /// duration in seconds
     public let duration: UInt
     public var state: State = .notStarted
     public var timeRemaining: UInt
     
-    var doubleDuration: Double {
-        Double(duration)
-    }
     
-    var ticker: Timer?
+    // MARK: - Private Properties
     
     private let oneSecond: Double = 1.0
+    private var ticker: Timer?
+    
+    
+    // MARK: - Public Methods
     
     public init(_ duration: UInt) {
         self.duration = duration
@@ -140,11 +144,14 @@ class TENTimer {
         state = .paused
     }
     
+    
+    // MARK: - Private Methods
+    
     private func tick() {
         ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
     }
     
-    @objc func tock() {
+    @objc private func tock() {
         timeRemaining -= 1
         ticker?.invalidate()
         
