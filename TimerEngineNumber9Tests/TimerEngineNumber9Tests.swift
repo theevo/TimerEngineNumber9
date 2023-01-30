@@ -72,7 +72,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         let timer = startTimer(2)
         
         let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1)
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
         if result == XCTWaiter.Result.timedOut {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
