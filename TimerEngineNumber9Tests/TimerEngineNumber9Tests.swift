@@ -131,6 +131,7 @@ class TENTimer {
     public func start() {
         state = .started
         tick()
+        print("Starting \(ObjectIdentifier(self)) of \(duration) seconds")
     }
     
     public func pause() {
@@ -145,17 +146,17 @@ class TENTimer {
     // MARK: - Private Methods
     
     private func tick() {
-        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: false)
+        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
     }
     
     @objc private func tock() {
+        print(" Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
         timeRemaining -= 1
-        ticker?.invalidate()
+        print("  Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
         
         if timeRemaining == 0 {
             state = .finished
-        } else {
-            tick()
+            ticker?.invalidate()
         }
     }
 }
