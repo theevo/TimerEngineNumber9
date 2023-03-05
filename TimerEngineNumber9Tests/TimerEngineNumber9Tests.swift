@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import TimerEngineNumber9
+import TimerEngineNumber9
 
 final class TimerEngineNumber9Tests: XCTestCase {
 
@@ -102,70 +102,5 @@ final class TimerEngineNumber9Tests: XCTestCase {
         let timer = TENTimer(seconds)
         timer.start()
         return timer
-    }
-}
-
-class TENTimer {
-    
-    // MARK: - Public Properties
-    
-    /// duration in seconds
-    public let duration: UInt
-    public var state: State = .notStarted
-    public var timeRemaining: UInt
-    
-    
-    // MARK: - Private Properties
-    
-    private let oneSecond: Double = 1.0
-    private var ticker: Timer?
-    
-    
-    // MARK: - Public Methods
-    
-    public init(_ duration: UInt) {
-        self.duration = duration
-        self.timeRemaining = duration
-    }
-    
-    public func start() {
-        state = .started
-        tick()
-        print("Starting \(ObjectIdentifier(self)) of \(duration) seconds")
-    }
-    
-    public func pause() {
-        guard state == .started else { return }
-        
-        ticker?.invalidate()
-        
-        state = .paused
-    }
-    
-    
-    // MARK: - Private Methods
-    
-    private func tick() {
-        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
-    }
-    
-    @objc private func tock() {
-        print(" Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
-        timeRemaining -= 1
-        print("  Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
-        
-        if timeRemaining == 0 {
-            state = .finished
-            ticker?.invalidate()
-        }
-    }
-}
-
-extension TENTimer {
-    enum State {
-        case notStarted
-        case started
-        case finished
-        case paused
     }
 }
