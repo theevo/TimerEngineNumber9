@@ -19,6 +19,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1SecondTimer_entersStartedState() {
         let timer = makeTimer()
         XCTAssertEqual(timer.state, .started)
+        timer.pause() // deallocate timer
     }
     
     func test_start1SecondTimer_finishesAfter1Second() {
