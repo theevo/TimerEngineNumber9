@@ -10,12 +10,10 @@ import TimerEngineNumber9
 
 final class TimerEngineNumber9Tests: XCTestCase {
 
-    func test_canSet3SecondTimer() throws {
+    func test_create3SecondTimer_shouldShow3secondsRemaining() throws {
         let timer = TENTimer(3)
         
-        let duration = timer.duration
-        
-        XCTAssertEqual(duration, 3)
+        XCTAssertEqual(timer.duration, 3)
     }
     
     func test_start1SecondTimer_entersStartedState() {
