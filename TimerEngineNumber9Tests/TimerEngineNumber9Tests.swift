@@ -96,9 +96,16 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     // MARK: - Helpers
     
-    func makeTimer(seconds: UInt = 1) -> TENTimer {
+    func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = TENTimer(seconds)
         timer.start()
+        trackForMemoryLeaks(timer, file: file, line: line)
         return timer
+    }
+    
+    func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Potential memory leak. \(String(describing: instance?.description)) should have been deallocated.", file: file, line: line)
+        }
     }
 }
