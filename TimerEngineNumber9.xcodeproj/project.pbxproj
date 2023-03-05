@@ -13,8 +13,6 @@
 		ACD685932971470A007CC4AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACD685922971470A007CC4AB /* Assets.xcassets */; };
 		ACD685962971470A007CC4AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACD685942971470A007CC4AB /* Main.storyboard */; };
 		ACD685A12971470B007CC4AB /* TimerEngineNumber9Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD685A02971470B007CC4AB /* TimerEngineNumber9Tests.swift */; };
-		ACD685AB2971470B007CC4AB /* TimerEngineNumber9UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD685AA2971470B007CC4AB /* TimerEngineNumber9UITests.swift */; };
-		ACD685AD2971470B007CC4AB /* TimerEngineNumber9UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD685AC2971470B007CC4AB /* TimerEngineNumber9UITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +43,6 @@
 		ACD6859C2971470B007CC4AB /* TimerEngineNumber9Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimerEngineNumber9Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD685A02971470B007CC4AB /* TimerEngineNumber9Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineNumber9Tests.swift; sourceTree = "<group>"; };
 		ACD685A62971470B007CC4AB /* TimerEngineNumber9UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimerEngineNumber9UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACD685AA2971470B007CC4AB /* TimerEngineNumber9UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineNumber9UITests.swift; sourceTree = "<group>"; };
-		ACD685AC2971470B007CC4AB /* TimerEngineNumber9UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineNumber9UITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +75,6 @@
 			children = (
 				ACD6858D2971470A007CC4AB /* TimerEngineNumber9 */,
 				ACD6859F2971470B007CC4AB /* TimerEngineNumber9Tests */,
-				ACD685A92971470B007CC4AB /* TimerEngineNumber9UITests */,
 				ACD6858C2971470A007CC4AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,15 +108,6 @@
 				ACD685A02971470B007CC4AB /* TimerEngineNumber9Tests.swift */,
 			);
 			path = TimerEngineNumber9Tests;
-			sourceTree = "<group>";
-		};
-		ACD685A92971470B007CC4AB /* TimerEngineNumber9UITests */ = {
-			isa = PBXGroup;
-			children = (
-				ACD685AA2971470B007CC4AB /* TimerEngineNumber9UITests.swift */,
-				ACD685AC2971470B007CC4AB /* TimerEngineNumber9UITestsLaunchTests.swift */,
-			);
-			path = TimerEngineNumber9UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,8 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACD685AB2971470B007CC4AB /* TimerEngineNumber9UITests.swift in Sources */,
-				ACD685AD2971470B007CC4AB /* TimerEngineNumber9UITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

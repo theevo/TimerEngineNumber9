@@ -39,17 +39,6 @@
                ReferencedContainer = "container:TimerEngineNumber9.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "YES"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ACD685A52971470B007CC4AB"
-               BuildableName = "TimerEngineNumber9UITests.xctest"
-               BlueprintName = "TimerEngineNumber9UITests"
-               ReferencedContainer = "container:TimerEngineNumber9.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
