@@ -21,7 +21,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         XCTAssertEqual(timer.state, .started)
     }
     
-    func test_start1SecondTimer_completesCountdownFrom1Second() {
+    func test_start1SecondTimer_finishesAfter1Second() {
         let timer = makeTimer()
         
         let exp = expectation(description: "Test after 1 second")
@@ -33,7 +33,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_start2SecondTimer_canPauseAfter1Second() {
+    func test_start2SecondTimer_pauseAfter1SecondEntersPauseState() {
         let timer = TENTimer(2)
         timer.start()
         
@@ -47,7 +47,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_start1SecondTimer_cannotPauseIfNotStarted() {
+    func test_create1SecondTimer_cannotPauseIfNotStarted() {
         let timer = TENTimer(1)
         timer.pause()
         XCTAssertNotEqual(timer.state, .paused, "Timer has not started. It should not be able to enter a paused state.")
