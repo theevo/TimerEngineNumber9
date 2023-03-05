@@ -19,12 +19,12 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start1SecondTimer_entersStartedState() {
-        let timer = startTimer()
+        let timer = makeTimer()
         XCTAssertEqual(timer.state, .started)
     }
     
     func test_start1SecondTimer_completesCountdownFrom1Second() {
-        let timer = startTimer()
+        let timer = makeTimer()
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -56,7 +56,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start1SecondTimer_cannotPauseIfFinished() {
-        let timer = startTimer(1)
+        let timer = makeTimer(seconds: 1)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -69,7 +69,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
-        let timer = startTimer(2)
+        let timer = makeTimer(seconds: 2)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -83,7 +83,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
-        let timer = startTimer(3)
+        let timer = makeTimer(seconds: 3)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1)
@@ -98,7 +98,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     // MARK: - Helpers
     
-    func startTimer(_ seconds: UInt = 1) -> TENTimer {
+    func makeTimer(seconds: UInt = 1) -> TENTimer {
         let timer = TENTimer(seconds)
         timer.start()
         return timer
