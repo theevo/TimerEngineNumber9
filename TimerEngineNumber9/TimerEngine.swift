@@ -19,6 +19,8 @@ public class TENTimer {
     
     // MARK: - Private Properties
     
+    private static let secondsIn1Minute: UInt = 60
+    
     private let oneSecond: Double = 1.0
     private var ticker: Timer?
     
@@ -28,6 +30,11 @@ public class TENTimer {
     public init(_ duration: UInt) {
         self.duration = duration
         self.timeRemaining = duration
+    }
+    
+    public convenience init(minutes: UInt) {
+        let seconds = minutes * TENTimer.secondsIn1Minute
+        self.init(seconds)
     }
     
     public func start() {
