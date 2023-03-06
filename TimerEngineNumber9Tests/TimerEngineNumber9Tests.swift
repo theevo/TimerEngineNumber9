@@ -11,19 +11,19 @@ import TimerEngineNumber9
 final class TimerEngineNumber9Tests: XCTestCase {
 
     func test_create3SecondTimer_shouldShow3secondsRemaining() throws {
-        let timer = TENTimer(3)
+        let timer = makeTimer(seconds: 3)
         
         XCTAssertEqual(timer.duration, 3)
     }
     
     func test_start1SecondTimer_entersStartedState() {
-        let timer = makeTimer()
+        let timer = startTimer()
         XCTAssertEqual(timer.state, .started)
         timer.pause() // deallocate timer
     }
     
     func test_start1SecondTimer_finishesAfter1Second() {
-        let timer = makeTimer()
+        let timer = startTimer()
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -35,8 +35,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start2SecondTimer_pauseAfter1SecondEntersPauseState() {
-        let timer = TENTimer(2)
-        timer.start()
+        let timer = startTimer(seconds: 2)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -49,13 +48,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_create1SecondTimer_cannotPauseIfNotStarted() {
-        let timer = TENTimer(1)
+        let timer = makeTimer()
         timer.pause()
         XCTAssertNotEqual(timer.state, .paused, "Timer has not started. It should not be able to enter a paused state.")
     }
     
     func test_start1SecondTimer_cannotPauseIfFinished() {
-        let timer = makeTimer(seconds: 1)
+        let timer = startTimer()
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -68,7 +67,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
-        let timer = makeTimer(seconds: 2)
+        let timer = startTimer(seconds: 2)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -82,7 +81,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
-        let timer = makeTimer(seconds: 3)
+        let timer = startTimer(seconds: 3)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1)
@@ -98,6 +97,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1MinuteTimer_pausingAfter1SecondShouldShow59SecondsRemaining() {
         let timer = TENTimer(minutes: 1)
         timer.start()
+        trackForMemoryLeaks(timer)
         
         let exp = expectation(description: "Test after 1 second")
         let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
@@ -111,7 +111,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_subscribe_1secondTimerShouldCallbackWhenFinished() {
-        let timer = TENTimer(1)
+        let timer = makeTimer()
         let spy = TENTimerSpy()
         
         trackForMemoryLeaks(timer)
@@ -133,8 +133,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = TENTimer(seconds)
-        timer.start()
         trackForMemoryLeaks(timer, file: file, line: line)
+        return timer
+    }
+    
+    func startTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
+        let timer = makeTimer(seconds: seconds, file: file, line: line)
+        timer.start()
         return timer
     }
     
