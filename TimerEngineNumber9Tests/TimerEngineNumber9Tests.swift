@@ -117,7 +117,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         trackForMemoryLeaks(timer)
         trackForMemoryLeaks(spy)
         
-        timer.delegate = spy
+        timer.subscribe(delegate: spy)
         timer.start()
         
         let exp = expectation(description: "Test after 1 second")

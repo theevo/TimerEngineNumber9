@@ -15,7 +15,6 @@ public class TENTimer {
     
     // MARK: - Public Properties
     
-    public var delegate: TENTimerDelegate?
     /// duration in seconds
     public let duration: UInt
     public var state: State = .notStarted
@@ -26,6 +25,7 @@ public class TENTimer {
     
     private static let secondsIn1Minute: UInt = 60
     
+    private var delegate: TENTimerDelegate?
     private let oneSecond: Double = 1.0
     private var ticker: Timer?
     
@@ -46,6 +46,10 @@ public class TENTimer {
         state = .started
         tick()
         print("Starting \(ObjectIdentifier(self)) of \(duration) seconds")
+    }
+    
+    public func subscribe(delegate: TENTimerDelegate) {
+        self.delegate = delegate
     }
     
     public func pause() {
