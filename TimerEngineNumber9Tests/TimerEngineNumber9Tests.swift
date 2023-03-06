@@ -112,10 +112,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     func test_subscribe_1secondTimerShouldCallbackWhenFinished() {
         let timer = makeTimer()
-        let spy = TENTimerSpy()
-        
-        trackForMemoryLeaks(timer)
-        trackForMemoryLeaks(spy)
+        let spy = makeSpy()
         
         timer.subscribe(delegate: spy)
         timer.start()
@@ -131,7 +128,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     func test_subscribe_2secondTimerShouldCallbackEachSecond() {
         let timer = makeTimer(seconds: 2)
-        let spy = TENTimerSpy()
+        let spy = makeSpy()
         
         trackForMemoryLeaks(spy)
         
@@ -173,6 +170,12 @@ final class TimerEngineNumber9Tests: XCTestCase {
         addTeardownBlock { [weak instance] in
             XCTAssertNil(instance, "Potential memory leak. \(String(describing: instance?.description)) should have been deallocated.", file: file, line: line)
         }
+    }
+    
+    private func makeSpy() -> TENTimerSpy {
+        let spy = TENTimerSpy()
+        trackForMemoryLeaks(spy)
+        return spy
     }
 }
 
