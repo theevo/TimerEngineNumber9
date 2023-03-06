@@ -25,26 +25,20 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1SecondTimer_finishesAfter1Second() {
         let timer = startTimer()
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             XCTAssertEqual(timer.state, .finished)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
     func test_start2SecondTimer_pauseAfter1SecondEntersPauseState() {
         let timer = startTimer(seconds: 2)
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
-            timer.pause()
-            XCTAssertEqual(timer.state, .paused)
-        } else {
-            XCTFail("Delay interrupted")
-        }
+        expectAfter(
+            seconds: 1.05,
+            timer: timer) {
+                timer.pause()
+                XCTAssertEqual(timer.state, .paused)
+            }
     }
     
     func test_create1SecondTimer_cannotPauseIfNotStarted() {
@@ -56,41 +50,29 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1SecondTimer_cannotPauseIfFinished() {
         let timer = startTimer()
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             timer.pause()
             XCTAssertNotEqual(timer.state, .paused)
-        } else {
-            XCTFail("Delay interrupted")
         }
-    }
+}
     
     func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
         let timer = startTimer(seconds: 2)
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 1)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
     func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
         let timer = startTimer(seconds: 3)
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 2)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
@@ -99,14 +81,10 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.start()
         trackForMemoryLeaks(timer)
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 59)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
@@ -117,12 +95,8 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.subscribe(delegate: spy)
         timer.start()
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             XCTAssertTrue(spy.didFinish)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
@@ -135,24 +109,30 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.subscribe(delegate: spy)
         timer.start()
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: 1.05, timer: timer) {
             XCTAssertEqual(spy.timeRemaining, 1)
-        } else {
-            XCTFail("Delay interrupted")
         }
-                
-        let exp2 = expectation(description: "Test after 2 seconds")
-        let result2 = XCTWaiter.wait(for: [exp2], timeout: 1.05)
-        if result2 == XCTWaiter.Result.timedOut {
+        
+        expectAfter(seconds: 1.05, timer: timer) {
             XCTAssertEqual(spy.timeRemaining, 0)
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     
     // MARK: - Helpers
+    
+    private func expectAfter(
+        seconds: TimeInterval,
+        timer: TENTimer,
+        assertion: () -> Void
+    ) {
+        let exp = expectation(description: "Test after \(seconds) second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
+        if result == XCTWaiter.Result.timedOut {
+            assertion()
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
     
     private func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = TENTimer(seconds)
