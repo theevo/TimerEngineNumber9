@@ -154,13 +154,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     // MARK: - Helpers
     
-    func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
+    private func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = TENTimer(seconds)
         trackForMemoryLeaks(timer, file: file, line: line)
         return timer
     }
     
-    func startTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
+    private func startTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = makeTimer(seconds: seconds, file: file, line: line)
         timer.start()
         return timer
