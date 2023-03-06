@@ -129,6 +129,32 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_subscribe_2secondTimerShouldCallbackEachSecond() {
+        let timer = makeTimer(seconds: 2)
+        let spy = TENTimerSpy()
+        
+        trackForMemoryLeaks(spy)
+        
+        timer.subscribe(delegate: spy)
+        timer.start()
+        
+        let exp = expectation(description: "Test after 1 second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertEqual(spy.timeRemaining, 1)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+                
+        let exp2 = expectation(description: "Test after 2 seconds")
+        let result2 = XCTWaiter.wait(for: [exp2], timeout: 1.05)
+        if result2 == XCTWaiter.Result.timedOut {
+            XCTAssertEqual(spy.timeRemaining, 0)
+        } else {
+            XCTFail("Delay interrupted")
+        }
+    }
+    
     // MARK: - Helpers
     
     func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
@@ -152,6 +178,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
 
 private class TENTimerSpy: TENTimerDelegate {
     var didFinish = false
+    var timeRemaining: UInt = 2
     
     func didComplete() {
         didFinish = true
