@@ -107,7 +107,26 @@ final class TimerEngineNumber9Tests: XCTestCase {
             XCTAssertEqual(timer.timeRemaining, 59)
         } else {
             XCTFail("Delay interrupted")
-        }        
+        }
+    }
+    
+    func test_subscribe_1secondTimerShouldCallbackWhenFinished() {
+        let timer = TENTimer(1)
+        let spy = TENTimerSpy()
+        
+        trackForMemoryLeaks(timer)
+        trackForMemoryLeaks(spy)
+        
+        timer.delegate = spy
+        timer.start()
+        
+        let exp = expectation(description: "Test after 1 second")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
+        if result == XCTWaiter.Result.timedOut {
+            XCTAssertTrue(spy.didFinish)
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
     
     // MARK: - Helpers
@@ -123,5 +142,14 @@ final class TimerEngineNumber9Tests: XCTestCase {
         addTeardownBlock { [weak instance] in
             XCTAssertNil(instance, "Potential memory leak. \(String(describing: instance?.description)) should have been deallocated.", file: file, line: line)
         }
+    }
+}
+
+private class TENTimerSpy: TENTimerDelegate {
+    var didFinish = false
+    
+    func didComplete() {
+        didFinish = true
+        print("**** this timer finished! ****")
     }
 }

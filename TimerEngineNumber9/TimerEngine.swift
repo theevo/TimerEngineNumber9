@@ -7,10 +7,15 @@
 
 import Foundation
 
+public protocol TENTimerDelegate {
+    func didComplete()
+}
+
 public class TENTimer {
     
     // MARK: - Public Properties
     
+    public var delegate: TENTimerDelegate?
     /// duration in seconds
     public let duration: UInt
     public var state: State = .notStarted
@@ -65,6 +70,7 @@ public class TENTimer {
         
         if timeRemaining == 0 {
             state = .finished
+            delegate?.didComplete()
             ticker?.invalidate()
         }
     }
