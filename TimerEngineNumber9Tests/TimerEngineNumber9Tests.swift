@@ -25,7 +25,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1SecondTimer_finishesAfter1Second() {
         let timer = startTimer()
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             XCTAssertEqual(timer.state, .finished)
         }
     }
@@ -34,7 +34,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         let timer = startTimer(seconds: 2)
         
         expectAfter(
-            seconds: 1.05,
+            seconds: TimeInterval.about1Second,
             timer: timer) {
                 timer.pause()
                 XCTAssertEqual(timer.state, .paused)
@@ -50,7 +50,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start1SecondTimer_cannotPauseIfFinished() {
         let timer = startTimer()
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             timer.pause()
             XCTAssertNotEqual(timer.state, .paused)
         }
@@ -59,7 +59,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start2SecondTimer_pausingAfter1SecondShouldShow1SecondRemains() {
         let timer = startTimer(seconds: 2)
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 1)
@@ -69,7 +69,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
         let timer = startTimer(seconds: 3)
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 2)
@@ -81,7 +81,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.start()
         trackForMemoryLeaks(timer)
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.timeRemaining, 59)
@@ -95,7 +95,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.subscribe(delegate: spy)
         timer.start()
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             XCTAssertTrue(spy.didFinish)
         }
     }
@@ -109,11 +109,11 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.subscribe(delegate: spy)
         timer.start()
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             XCTAssertEqual(spy.timeRemaining, 1)
         }
         
-        expectAfter(seconds: 1.05, timer: timer) {
+        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
             XCTAssertEqual(spy.timeRemaining, 0)
         }
     }
@@ -167,4 +167,8 @@ private class TENTimerSpy: TENTimerDelegate {
         didFinish = true
         print("**** this timer finished! ****")
     }
+}
+
+extension TimeInterval {
+    fileprivate static let about1Second: TimeInterval = 1.05
 }
