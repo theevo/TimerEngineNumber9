@@ -66,13 +66,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_start3SecondTimer_pausingAfter1SecondShouldShow2SecondsRemains() {
+    func test_start3SecondTimer_pausingAfter2SecondsShouldShow1SecondsRemains() {
         let timer = startTimer(seconds: 3)
         
-        expectAfter(seconds: TimeInterval.about1Second, timer: timer) {
+        expectAfter(seconds: 2.05, timer: timer) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
-            XCTAssertEqual(timer.timeRemaining, 2)
+            XCTAssertEqual(timer.timeRemaining, 1)
         }
     }
     
@@ -121,12 +121,12 @@ final class TimerEngineNumber9Tests: XCTestCase {
     // MARK: - Helpers
     
     private func expectAfter(
-        seconds: TimeInterval,
+        seconds timeout: TimeInterval,
         timer: TENTimer,
         assertion: () -> Void
     ) {
-        let exp = expectation(description: "Test after \(seconds) second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1.05)
+        let exp = expectation(description: "Test after \(timeout) seconds")
+        let result = XCTWaiter.wait(for: [exp], timeout: timeout)
         if result == XCTWaiter.Result.timedOut {
             assertion()
         } else {
