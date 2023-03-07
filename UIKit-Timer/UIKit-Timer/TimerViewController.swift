@@ -9,9 +9,9 @@ import UIKit
 import TENTimer
 
 class PlayPauseButton: UIButton {
-    enum Icon {
-        case Play
-        case Pause
+    enum Icon: String {
+        case Play = "play.circle.fill"
+        case Pause = "pause.circle.fill"
     }
     
     var icon: Icon = .Play
@@ -19,6 +19,7 @@ class PlayPauseButton: UIButton {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        updateView()
     }
     
     required init?(coder: NSCoder) {
@@ -27,6 +28,11 @@ class PlayPauseButton: UIButton {
     
     func toggle() {
         icon = icon == .Play ? .Pause : .Play
+        updateView()
+    }
+    
+    func updateView() {
+        imageView?.image = UIImage(systemName: icon.rawValue)
     }
 }
 

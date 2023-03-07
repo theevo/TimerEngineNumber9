@@ -26,12 +26,14 @@ final class TimerViewControllerTests: XCTestCase {
     func test_button_showsPlayWhenLoaded() {
         let sut = PlayPauseButton()
         XCTAssertEqual(sut.icon, .Play)
+        XCTAssertEqual(sut.imageView?.image, UIImage(systemName: "play.circle.fill"))
     }
     
     func test_button_togglesFromPlayToPause() {
         let sut = PlayPauseButton()
         sut.toggle()
         XCTAssertEqual(sut.icon, .Pause)
+        XCTAssertEqual(sut.image, UIImage(systemName: "pause.circle.fill"))
     }
     
     func test_timerVC_containsOneButton() {
@@ -50,8 +52,14 @@ final class TimerViewControllerTests: XCTestCase {
     }
 }
 
-fileprivate extension UInt {
+private extension UInt {
     var seconds: UInt {
         self * 60
+    }
+}
+
+private extension PlayPauseButton {
+    var image: UIImage? {
+        imageView?.image
     }
 }
