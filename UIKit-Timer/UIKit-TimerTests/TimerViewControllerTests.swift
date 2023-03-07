@@ -22,6 +22,11 @@ final class TimerViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.timeRemaining, minutes.seconds)
     }
+    
+    func test_button_showsPlayWhenLoaded() {
+        let sut = PlayPauseButton()
+        XCTAssertEqual(sut.icon, .Play)
+    }
 }
 
 fileprivate extension UInt {

@@ -8,6 +8,24 @@
 import UIKit
 import TENTimer
 
+class PlayPauseButton: UIButton {
+    enum Icon {
+        case Play
+        case Pause
+    }
+    
+    var icon: Icon = .Play
+    
+    init() {
+        super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class TimerViewController: UIViewController {
     
     var timer = TENTimer(minutes: 25)
