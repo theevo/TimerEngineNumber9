@@ -20,6 +20,12 @@ final class TimerViewControllerTests: XCTestCase {
         let minutes: UInt = 7
         let sut = TimerViewController(minutes: minutes)
         sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.timeRemaining, minutes * 60)
+        XCTAssertEqual(sut.timeRemaining, minutes.seconds)
+    }
+}
+
+fileprivate extension UInt {
+    var seconds: UInt {
+        self * 60
     }
 }
