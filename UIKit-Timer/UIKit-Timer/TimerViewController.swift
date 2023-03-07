@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TimerViewController.swift
 //  UIKit-Timer
 //
 //  Created by Theo Vora on 3/7/23.
@@ -8,11 +8,11 @@
 import UIKit
 import TENTimer
 
-class ViewController: UIViewController {
+class TimerViewController: UIViewController {
     
     let timer = TENTimer(minutes: 1)
     
-    var secondsRemaining: UInt {
+    var timeRemaining: UInt {
         timer.timeRemaining
     }
 
@@ -20,9 +20,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        print("Time remaining: \(secondsRemaining)")
+        print("Time remaining: \(timeRemaining)")
     }
 
 
 }
-

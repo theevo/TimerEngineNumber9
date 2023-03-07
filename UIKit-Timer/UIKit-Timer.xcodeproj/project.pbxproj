@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59129B72F8D002661B9 /* AppDelegate.swift */; };
 		ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */; };
-		ACA2F59629B72F8D002661B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59529B72F8D002661B9 /* ViewController.swift */; };
 		ACA2F59929B72F8D002661B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59729B72F8D002661B9 /* Main.storyboard */; };
 		ACA2F59B29B72F8E002661B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59A29B72F8E002661B9 /* Assets.xcassets */; };
 		ACA2F59E29B72F8E002661B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59C29B72F8E002661B9 /* LaunchScreen.storyboard */; };
-		ACA2F5A929B72F8E002661B9 /* UIKit_TimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5A829B72F8E002661B9 /* UIKit_TimerTests.swift */; };
 		ACA2F5B329B72F8E002661B9 /* UIKit_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5B229B72F8E002661B9 /* UIKit_TimerUITests.swift */; };
 		ACA2F5B529B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5B429B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift */; };
 		ACA2F5CB29B72FA5002661B9 /* TENTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA2F5C829B72FA1002661B9 /* TENTimer.framework */; };
 		ACA2F5CC29B72FA5002661B9 /* TENTimer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACA2F5C829B72FA1002661B9 /* TENTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ACA2F5D129B732A8002661B9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5D029B732A8002661B9 /* TimerViewController.swift */; };
+		ACA2F5D329B732D1002661B9 /* TimerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,17 +69,17 @@
 		ACA2F58E29B72F8D002661B9 /* UIKit-Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit-Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F59129B72F8D002661B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ACA2F59529B72F8D002661B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ACA2F59829B72F8D002661B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ACA2F59A29B72F8E002661B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACA2F59D29B72F8E002661B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACA2F59F29B72F8E002661B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACA2F5A429B72F8E002661B9 /* UIKit-TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIKit-TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACA2F5A829B72F8E002661B9 /* UIKit_TimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_TimerTests.swift; sourceTree = "<group>"; };
 		ACA2F5AE29B72F8E002661B9 /* UIKit-TimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIKit-TimerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F5B229B72F8E002661B9 /* UIKit_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_TimerUITests.swift; sourceTree = "<group>"; };
 		ACA2F5B429B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_TimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ACA2F5C229B72FA1002661B9 /* TENTimer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TENTimer.xcodeproj; path = ../TENTimer/TENTimer.xcodeproj; sourceTree = "<group>"; };
+		ACA2F5D029B732A8002661B9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 			children = (
 				ACA2F59129B72F8D002661B9 /* AppDelegate.swift */,
 				ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */,
-				ACA2F59529B72F8D002661B9 /* ViewController.swift */,
+				ACA2F5D029B732A8002661B9 /* TimerViewController.swift */,
 				ACA2F59729B72F8D002661B9 /* Main.storyboard */,
 				ACA2F59A29B72F8E002661B9 /* Assets.xcassets */,
 				ACA2F59C29B72F8E002661B9 /* LaunchScreen.storyboard */,
@@ -146,7 +146,7 @@
 		ACA2F5A729B72F8E002661B9 /* UIKit-TimerTests */ = {
 			isa = PBXGroup;
 			children = (
-				ACA2F5A829B72F8E002661B9 /* UIKit_TimerTests.swift */,
+				ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */,
 			);
 			path = "UIKit-TimerTests";
 			sourceTree = "<group>";
@@ -249,6 +249,7 @@
 					};
 					ACA2F5A329B72F8E002661B9 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = ACA2F58D29B72F8D002661B9;
 					};
 					ACA2F5AD29B72F8E002661B9 = {
@@ -332,8 +333,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACA2F59629B72F8D002661B9 /* ViewController.swift in Sources */,
 				ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */,
+				ACA2F5D129B732A8002661B9 /* TimerViewController.swift in Sources */,
 				ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,7 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACA2F5A929B72F8E002661B9 /* UIKit_TimerTests.swift in Sources */,
+				ACA2F5D329B732D1002661B9 /* TimerViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,15 +566,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6QY69PUF72;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joybending.UIKit-TimerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIKit-Timer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UIKit-Timer";
@@ -585,11 +593,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6QY69PUF72;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.joybending.UIKit-TimerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
