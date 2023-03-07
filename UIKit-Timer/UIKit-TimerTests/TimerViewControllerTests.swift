@@ -27,6 +27,12 @@ final class TimerViewControllerTests: XCTestCase {
         let sut = PlayPauseButton()
         XCTAssertEqual(sut.icon, .Play)
     }
+    
+    func test_button_togglesFromPlayToPause() {
+        let sut = PlayPauseButton()
+        sut.toggle()
+        XCTAssertEqual(sut.icon, .Pause)
+    }
 }
 
 fileprivate extension UInt {

@@ -24,6 +24,10 @@ class PlayPauseButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func toggle() {
+        icon = icon == .Play ? .Pause : .Play
+    }
 }
 
 class TimerViewController: UIViewController {
