@@ -38,6 +38,9 @@ class TimerViewController: UIViewController {
         timer.timeRemaining
     }
     
+    var playPauseButton = PlayPauseButton()
+    
+    
     convenience init(minutes: UInt) {
         self.init()
         timer = TENTimer(minutes: minutes)
@@ -47,7 +50,11 @@ class TimerViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        print("Time remaining: \(timeRemaining)")
+        addSubviews()
+    }
+    
+    func addSubviews() {
+        view.addSubview(playPauseButton)
     }
 
 

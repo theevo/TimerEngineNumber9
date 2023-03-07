@@ -33,6 +33,21 @@ final class TimerViewControllerTests: XCTestCase {
         sut.toggle()
         XCTAssertEqual(sut.icon, .Pause)
     }
+    
+    func test_timerVC_containsOneButton() {
+        let sut = TimerViewController()
+        sut.loadViewIfNeeded()
+        
+        var buttons = [PlayPauseButton]()
+        
+        sut.view.subviews.forEach { subview in
+            if let button = subview as? PlayPauseButton {
+                buttons.append(button)
+            }
+        }
+        
+        XCTAssertEqual(buttons.count, 1)
+    }
 }
 
 fileprivate extension UInt {
