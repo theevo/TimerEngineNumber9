@@ -15,4 +15,11 @@ final class TimerViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertGreaterThanOrEqual(sut.timeRemaining, 0)
     }
+    
+    func test_timerVC_acceptsMinutesParameter() {
+        let minutes: UInt = 7
+        let sut = TimerViewController(minutes: minutes)
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.timeRemaining, minutes * 60)
+    }
 }

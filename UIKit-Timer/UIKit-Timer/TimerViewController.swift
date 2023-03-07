@@ -10,10 +10,15 @@ import TENTimer
 
 class TimerViewController: UIViewController {
     
-    let timer = TENTimer(minutes: 1)
+    var timer = TENTimer(minutes: 25)
     
     var timeRemaining: UInt {
         timer.timeRemaining
+    }
+    
+    convenience init(minutes: UInt) {
+        self.init()
+        timer = TENTimer(minutes: minutes)
     }
 
     override func viewDidLoad() {
