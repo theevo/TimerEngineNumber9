@@ -32,7 +32,14 @@ class PlayPauseButton: UIButton {
     }
     
     func updateView() {
-        imageView?.image = UIImage(systemName: icon.rawValue)
+        configuration = setConfiguration()
+    }
+    
+    private func setConfiguration() -> UIButton.Configuration {
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: icon.rawValue)
+        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 80)
+        return config
     }
 }
 
@@ -61,6 +68,11 @@ class TimerViewController: UIViewController {
     
     func addSubviews() {
         view.addSubview(playPauseButton)
+        
+        NSLayoutConstraint.activate([
+            playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            playPauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
 
 
