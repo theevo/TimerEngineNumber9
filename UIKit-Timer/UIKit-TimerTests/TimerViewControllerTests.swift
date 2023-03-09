@@ -49,6 +49,16 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertEqual(buttons.count, 1)
     }
     
+    func test_timerVC_tapPlayPauseButtonOnceWillToggleFromPlayToPause() {
+        let sut = makeSUT()
+        
+        XCTAssertEqual(sut.playPauseButton.icon, .Play)
+        
+        sut.playPauseButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(sut.playPauseButton.icon, .Pause)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> TimerViewController {

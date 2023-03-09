@@ -67,6 +67,8 @@ class TimerViewController: UIViewController {
     }
     
     func addSubviews() {
+        playPauseButton.addTarget(self, action: #selector(tapPlayPauseButton), for: .touchUpInside)
+        
         view.addSubview(playPauseButton)
         
         NSLayoutConstraint.activate([
@@ -75,5 +77,7 @@ class TimerViewController: UIViewController {
         ])
     }
 
-
+    @objc func tapPlayPauseButton() {
+        playPauseButton.toggle()
+    }
 }
