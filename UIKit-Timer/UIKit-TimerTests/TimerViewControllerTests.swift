@@ -11,8 +11,7 @@ import XCTest
 final class TimerViewControllerTests: XCTestCase {
 
     func test_timeRemaining_hasIntegerValue() {
-        let sut = TimerViewController()
-        sut.loadViewIfNeeded()
+        let sut = makeSUT()
         XCTAssertGreaterThanOrEqual(sut.timeRemaining, 0)
     }
     
@@ -37,8 +36,7 @@ final class TimerViewControllerTests: XCTestCase {
     }
     
     func test_timerVC_containsOneButton() {
-        let sut = TimerViewController()
-        sut.loadViewIfNeeded()
+        let sut = makeSUT()
         
         var buttons = [PlayPauseButton]()
         
@@ -49,6 +47,14 @@ final class TimerViewControllerTests: XCTestCase {
         }
         
         XCTAssertEqual(buttons.count, 1)
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT() -> TimerViewController {
+        let sut = TimerViewController()
+        sut.loadViewIfNeeded()
+        return sut
     }
 }
 
