@@ -53,6 +53,8 @@ class TimerViewController: UIViewController {
     
     var playPauseButton = PlayPauseButton()
     
+    var countdownTimerLabel = UILabel()
+    
     
     convenience init(minutes: UInt) {
         self.init()
@@ -62,6 +64,8 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        countdownTimerLabel.text = "25:00"
         
         addSubviews()
     }

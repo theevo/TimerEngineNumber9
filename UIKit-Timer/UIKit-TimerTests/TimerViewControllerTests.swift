@@ -59,6 +59,13 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.playPauseButton.icon, .Pause)
     }
     
+    func test_timerVC_displaysCountdownTimer() {
+        let sut = makeSUT()
+        
+        XCTAssertNotNil(sut.countdownTimerLabel)
+        XCTAssertNotNil(sut.countdownTimerLabel.text)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> TimerViewController {
