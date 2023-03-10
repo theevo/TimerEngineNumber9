@@ -62,8 +62,8 @@ final class TimerViewControllerTests: XCTestCase {
     func test_timerVC_displaysCountdownTimer() {
         let sut = makeSUT()
         
-        XCTAssertNotNil(sut.countdownTimerLabel)
-        XCTAssertNotNil(sut.countdownTimerLabel.text)
+        XCTAssertNotNil(sut.countdownTimerLabel.text, "countdownTimerLabel.text should not be nil")
+        XCTAssertFalse(sut.countdownTimerLabel.text?.isEmpty ?? true, "countdownTimerLabel.text should not be empty")
     }
     
     // MARK: - Helpers

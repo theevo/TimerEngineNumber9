@@ -63,19 +63,25 @@ class TimerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        countdownTimerLabel.text = "25:00"
-        
-        addSubviews()
+        configureSubviews()
+        layoutSubviews()
     }
     
-    func addSubviews() {
-        playPauseButton.addTarget(self, action: #selector(tapPlayPauseButton), for: .touchUpInside)
+    func configureSubviews() {
+        countdownTimerLabel.text = "25:00"
+        countdownTimerLabel.translatesAutoresizingMaskIntoConstraints = false
+        countdownTimerLabel.font = UIFont.systemFont(ofSize: 75, weight: .regular)
         
+        playPauseButton.addTarget(self, action: #selector(tapPlayPauseButton), for: .touchUpInside)
+    }
+    
+    func layoutSubviews() {
+        view.addSubview(countdownTimerLabel)
         view.addSubview(playPauseButton)
         
         NSLayoutConstraint.activate([
+            countdownTimerLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            NSLayoutConstraint(item: countdownTimerLabel, attribute: .centerY, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerY, multiplier: 0.5, constant: 0),
             playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             playPauseButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
