@@ -21,6 +21,11 @@ public class TENTimer {
     public var state: State = .notStarted
     public var timeRemaining: UInt
     
+    public var timeRemainingString: String {
+        let minutes = timeRemaining / 60
+        let seconds = timeRemaining % 60
+        return "\(minutes):\(seconds)"
+    }
     
     // MARK: - Private Properties
     

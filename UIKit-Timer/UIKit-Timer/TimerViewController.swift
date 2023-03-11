@@ -52,7 +52,7 @@ class TimerViewController: UIViewController {
             timer.timeRemaining
         }
         set(newValue) {
-            countdownTimerLabel.text = newValue.string
+            countdownTimerLabel.text = timer.timeRemainingString
         }
     }
     
@@ -106,11 +106,4 @@ extension TimerViewController: TENTimerDelegate {
     }
 }
 
-extension UInt {
-    var string: String {
-        // seconds to string like 24:59
-        let minutes = self / 60
-        let seconds = self % 60
-        return "\(minutes):\(seconds)"
-    }
-}
+
