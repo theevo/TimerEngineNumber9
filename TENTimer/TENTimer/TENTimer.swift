@@ -74,10 +74,8 @@ public class TENTimer {
     }
     
     @objc private func tock() {
-        print(" Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
         timeRemaining -= 1
         delegate?.timeRemaining = timeRemaining
-        print("  Timer \(ObjectIdentifier(self)) of \(duration) seconds has **\(timeRemaining)** sec remaining")
         
         if timeRemaining == 0 {
             state = .finished
