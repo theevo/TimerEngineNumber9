@@ -74,7 +74,7 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.timer.state, .started)
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertNotEqual(sut.countdownTimerLabel.text, "25:00")
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
         }
         
         /// `timer` might leak memory

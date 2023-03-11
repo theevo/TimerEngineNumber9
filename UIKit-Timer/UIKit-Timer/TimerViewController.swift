@@ -109,6 +109,8 @@ extension TimerViewController: TENTimerDelegate {
 extension UInt {
     var string: String {
         // seconds to string like 24:59
-        return "00:\(self)"
+        let minutes = self / 60
+        let seconds = self % 60
+        return "\(minutes):\(seconds)"
     }
 }
