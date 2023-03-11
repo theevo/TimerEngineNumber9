@@ -9,8 +9,8 @@ A timer engine written completely in Swift using Test Driven Development
 
 ## Feedback
 
-@theevo@iosdev.space (Mastodon)
-@theevo (Twitter)
+- [@theevo@iosdev.space](https://iosdev.space/@theevo) (Mastodon)
+- [@theevo](https://twitter.com/theevo) (Twitter)
 
 ## License
 
