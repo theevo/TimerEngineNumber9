@@ -9,11 +9,6 @@ import XCTest
 @testable import UIKit_Timer
 
 final class TimerViewControllerTests: XCTestCase {
-
-    func test_timeRemaining_hasIntegerValue() {
-        let sut = makeSUT()
-        XCTAssertGreaterThanOrEqual(sut.timeRemaining, 0)
-    }
     
     func test_timerVC_acceptsMinutesParameter() {
         let minutes: UInt = 7
@@ -78,6 +73,24 @@ final class TimerViewControllerTests: XCTestCase {
         }
         
         /// `timer` might leak memory
+    }
+    
+    func test_timerVC_pauseAfterStartingStopsTheCountdownTimer() {
+        let sut = makeSUT()
+        
+        sut.playPauseButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(sut.timer.state, .started)
+        
+        expectAfter(seconds: TimerViewControllerTests.about1Second) {
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
+            sut.playPauseButton.sendActions(for: .touchUpInside)
+            XCTAssertEqual(sut.playPauseButton.icon, .Play)
+        }
+        
+        expectAfter(seconds: TimerViewControllerTests.about1Second) {
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
+        }
     }
     
     // MARK: - Helpers

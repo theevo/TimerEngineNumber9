@@ -95,8 +95,17 @@ class TimerViewController: UIViewController {
     }
 
     @objc func tapPlayPauseButton() {
-        playPauseButton.toggle()
-        timer.start()
+        switch timer.state {
+        case .notStarted, .paused:
+            playPauseButton.toggle()
+            timer.start()
+        case .started:
+            playPauseButton.toggle()
+            timer.pause()
+        case .finished:
+            // do nothing
+            return
+        }
     }
 }
 
