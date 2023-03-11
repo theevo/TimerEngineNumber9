@@ -66,6 +66,16 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.countdownTimerLabel.text?.isEmpty ?? true, "countdownTimerLabel.text should not be empty")
     }
     
+    func test_timerVC_pressButtonStartsCountdownTimer() {
+        let sut = makeSUT()
+        
+        sut.playPauseButton.sendActions(for: .touchUpInside)
+        
+        XCTAssertEqual(sut.timer.state, .started)
+        
+        /// `timer` might leak memory
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> TimerViewController {

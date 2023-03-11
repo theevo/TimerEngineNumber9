@@ -89,5 +89,6 @@ class TimerViewController: UIViewController {
 
     @objc func tapPlayPauseButton() {
         playPauseButton.toggle()
+        timer.start()
     }
 }
