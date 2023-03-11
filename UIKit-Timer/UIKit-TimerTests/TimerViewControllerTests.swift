@@ -73,15 +73,34 @@ final class TimerViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.timer.state, .started)
         
+        expectAfter(seconds: TimerViewControllerTests.about1Second) {
+            XCTAssertNotEqual(sut.countdownTimerLabel.text, "25:00")
+        }
+        
         /// `timer` might leak memory
     }
     
     // MARK: - Helpers
     
+    static let about1Second: TimeInterval = 1.05
+    
     private func makeSUT() -> TimerViewController {
         let sut = TimerViewController()
         sut.loadViewIfNeeded()
         return sut
+    }
+    
+    private func expectAfter(
+        seconds timeout: TimeInterval = about1Second,
+        assertion: () -> Void
+    ) {
+        let exp = expectation(description: "Test after \(timeout) seconds")
+        let result = XCTWaiter.wait(for: [exp], timeout: timeout)
+        if result == XCTWaiter.Result.timedOut {
+            assertion()
+        } else {
+            XCTFail("Delay interrupted")
+        }
     }
 }
 

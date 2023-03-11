@@ -48,7 +48,12 @@ class TimerViewController: UIViewController {
     var timer = TENTimer(minutes: 25)
     
     var timeRemaining: UInt {
-        timer.timeRemaining
+        get {
+            timer.timeRemaining
+        }
+        set(newValue) {
+            countdownTimerLabel.text = newValue.string
+        }
     }
     
     var playPauseButton = PlayPauseButton()
@@ -72,6 +77,8 @@ class TimerViewController: UIViewController {
         countdownTimerLabel.translatesAutoresizingMaskIntoConstraints = false
         countdownTimerLabel.font = UIFont.systemFont(ofSize: 75, weight: .regular)
         
+        timer.subscribe(delegate: self)
+        
         playPauseButton.addTarget(self, action: #selector(tapPlayPauseButton), for: .touchUpInside)
     }
     
@@ -90,5 +97,18 @@ class TimerViewController: UIViewController {
     @objc func tapPlayPauseButton() {
         playPauseButton.toggle()
         timer.start()
+    }
+}
+
+extension TimerViewController: TENTimerDelegate {
+    func didComplete() {
+        print("timer finished")
+    }
+}
+
+extension UInt {
+    var string: String {
+        // seconds to string like 24:59
+        return "00:\(self)"
     }
 }
