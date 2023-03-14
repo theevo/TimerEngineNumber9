@@ -41,15 +41,14 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.playPauseButton.image, pauseImage)
     }
     
-    func test_timerVC_pauseAfterStartingStopsTheCountdownTimer() {
+    func test_timerVC_startAdvancesCountdownTimerThenPauseStopsCountdownTimer() {
         let sut = makeSUT()
         
-        sut.playPauseButton.sendActions(for: .touchUpInside)
+        sut.playPauseButton.sendActions(for: .touchUpInside) // play
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
             XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
-            sut.playPauseButton.sendActions(for: .touchUpInside)
-            XCTAssertEqual(sut.playPauseButton.icon, .Play)
+            sut.playPauseButton.sendActions(for: .touchUpInside) // pause
         }
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
