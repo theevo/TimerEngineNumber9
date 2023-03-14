@@ -13,7 +13,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_create3SecondTimer_shouldShow3secondsRemaining() throws {
         let timer = makeTimer(seconds: 3)
         
-        XCTAssertEqual(timer.duration, 3)
+        XCTAssertEqual(timer.seconds, 3)
     }
     
     func test_start1SecondTimer_entersStartedState() {

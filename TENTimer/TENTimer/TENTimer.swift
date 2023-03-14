@@ -16,9 +16,10 @@ public class TENTimer {
     
     // MARK: - Public Properties
     
-    /// duration in seconds
-    public let duration: UInt
+    /// number of seconds set on this timer. remains constant even after timer has started.
+    public let seconds: UInt
     public var state: State = .notStarted
+    /// time remaining in seconds. this value will update while the timer is counting down.
     public var timeRemaining: UInt
     
     public var timeRemainingString: String {
@@ -42,9 +43,9 @@ public class TENTimer {
     
     // MARK: - Public Methods
     
-    public init(_ duration: UInt) {
-        self.duration = duration
-        self.timeRemaining = duration
+    public init(_ seconds: UInt) {
+        self.seconds = seconds
+        self.timeRemaining = seconds
     }
     
     public convenience init(minutes: UInt) {
@@ -55,7 +56,7 @@ public class TENTimer {
     public func start() {
         state = .started
         tick()
-        print("Starting \(ObjectIdentifier(self)) of \(duration) seconds")
+        print("Starting \(ObjectIdentifier(self)) of \(seconds) seconds")
     }
     
     public func subscribe(delegate: TENTimerDelegate) {
