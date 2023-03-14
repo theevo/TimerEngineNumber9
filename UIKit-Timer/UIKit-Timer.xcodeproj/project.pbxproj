@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC9FC90929C062C700AB228B /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FC90829C062C700AB228B /* PlayPauseButton.swift */; };
 		ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59129B72F8D002661B9 /* AppDelegate.swift */; };
 		ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */; };
 		ACA2F59929B72F8D002661B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59729B72F8D002661B9 /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC9FC90829C062C700AB228B /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		ACA2F58E29B72F8D002661B9 /* UIKit-Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit-Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F59129B72F8D002661B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				ACA2F59A29B72F8E002661B9 /* Assets.xcassets */,
 				ACA2F59C29B72F8E002661B9 /* LaunchScreen.storyboard */,
 				ACA2F59F29B72F8E002661B9 /* Info.plist */,
+				AC9FC90829C062C700AB228B /* PlayPauseButton.swift */,
 			);
 			path = "UIKit-Timer";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9FC90929C062C700AB228B /* PlayPauseButton.swift in Sources */,
 				ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */,
 				ACA2F5D129B732A8002661B9 /* TimerViewController.swift in Sources */,
 				ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */,
