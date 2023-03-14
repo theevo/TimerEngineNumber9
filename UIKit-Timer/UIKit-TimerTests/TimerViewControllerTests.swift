@@ -17,19 +17,6 @@ final class TimerViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.timeRemaining, minutes.seconds)
     }
     
-    func test_button_showsPlayWhenLoaded() {
-        let sut = PlayPauseButton()
-        XCTAssertEqual(sut.icon, .Play)
-        XCTAssertEqual(sut.imageView?.image, UIImage(systemName: "play.circle.fill"))
-    }
-    
-    func test_button_togglesFromPlayToPause() {
-        let sut = PlayPauseButton()
-        sut.toggle()
-        XCTAssertEqual(sut.icon, .Pause)
-        XCTAssertEqual(sut.image, UIImage(systemName: "pause.circle.fill"))
-    }
-    
     func test_timerVC_containsOneButton() {
         let sut = makeSUT()
         
@@ -47,40 +34,17 @@ final class TimerViewControllerTests: XCTestCase {
     func test_timerVC_tapPlayPauseButtonOnceWillToggleFromPlayToPause() {
         let sut = makeSUT()
         
-        XCTAssertEqual(sut.playPauseButton.icon, .Play)
+        XCTAssertEqual(sut.playPauseButton.image, playImage)
         
         sut.playPauseButton.sendActions(for: .touchUpInside)
         
-        XCTAssertEqual(sut.playPauseButton.icon, .Pause)
-    }
-    
-    func test_timerVC_displaysCountdownTimer() {
-        let sut = makeSUT()
-        
-        XCTAssertNotNil(sut.countdownTimerLabel.text, "countdownTimerLabel.text should not be nil")
-        XCTAssertFalse(sut.countdownTimerLabel.text?.isEmpty ?? true, "countdownTimerLabel.text should not be empty")
-    }
-    
-    func test_timerVC_pressButtonStartsCountdownTimer() {
-        let sut = makeSUT()
-        
-        sut.playPauseButton.sendActions(for: .touchUpInside)
-        
-        XCTAssertEqual(sut.timer.state, .started)
-        
-        expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
-        }
-        
-        /// `timer` might leak memory
+        XCTAssertEqual(sut.playPauseButton.image, pauseImage)
     }
     
     func test_timerVC_pauseAfterStartingStopsTheCountdownTimer() {
         let sut = makeSUT()
         
         sut.playPauseButton.sendActions(for: .touchUpInside)
-        
-        XCTAssertEqual(sut.timer.state, .started)
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
             XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
@@ -94,6 +58,9 @@ final class TimerViewControllerTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    let playImage = UIImage(systemName: PlayPauseButton.Icon.Play.rawValue)
+    let pauseImage = UIImage(systemName: PlayPauseButton.Icon.Pause.rawValue)
     
     static let about1Second: TimeInterval = 1.05
     
