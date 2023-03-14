@@ -117,6 +117,12 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_timeRemainingString_secondsShouldHaveLeadingZero() {
+        let timer = makeTimer(seconds: 69)
+
+        XCTAssertEqual(timer.timeRemainingString, "1:09")
+    }
+    
     // MARK: - Helpers
     
     let about1Second: TimeInterval = 1.05

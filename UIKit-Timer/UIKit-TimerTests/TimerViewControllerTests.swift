@@ -56,20 +56,6 @@ final class TimerViewControllerTests: XCTestCase {
         }
     }
     
-    func test_timerVC_countdownTimerShouldHaveLeadingZeroInSeconds() {
-        let sut = TimerViewController(seconds: 70)
-        sut.loadViewIfNeeded()
-        
-        XCTAssertEqual(sut.countdownTimerLabel.text, "1:10")
-        
-        sut.playPauseButton.sendActions(for: .touchUpInside) // play
-        
-        expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            sut.playPauseButton.sendActions(for: .touchUpInside) // pause
-            XCTAssertEqual(sut.countdownTimerLabel.text, "1:09")
-        }
-    }
-    
     // MARK: - Helpers
     
     let playImage = UIImage(systemName: PlayPauseButton.Icon.Play.rawValue)
