@@ -30,6 +30,11 @@ class TimerViewController: UIViewController {
         self.init()
         timer = TENTimer(minutes: minutes)
     }
+    
+    convenience init(seconds: UInt) {
+        self.init()
+        timer = TENTimer(seconds)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +43,7 @@ class TimerViewController: UIViewController {
     }
     
     func configureSubviews() {
-        countdownTimerLabel.text = "25:00"
+        countdownTimerLabel.text = timer.timeRemainingString
         countdownTimerLabel.translatesAutoresizingMaskIntoConstraints = false
         countdownTimerLabel.font = UIFont.systemFont(ofSize: 75, weight: .regular)
         

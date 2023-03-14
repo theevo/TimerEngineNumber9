@@ -24,7 +24,11 @@ public class TENTimer {
     public var timeRemainingString: String {
         let minutes = timeRemaining / 60
         let seconds = timeRemaining % 60
-        return "\(minutes):\(seconds)"
+        if seconds < 10 {
+            return "\(minutes):0\(seconds)"
+        } else {
+            return "\(minutes):\(seconds)"
+        }
     }
     
     // MARK: - Private Properties
