@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol TENTimerDelegate {
-    var secondsRemaining: UInt { get set }
+    var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) { get set }
     func didComplete()
 }
 
@@ -19,6 +19,7 @@ public class TENTimer {
     /// number of seconds set on this timer. remains constant even after timer has started.
     public let seconds: UInt
     public var state: State = .notStarted
+    
     /// time remaining in *tenths* of a second. this value will update while the timer is counting down. Ex: value of 60 = 6 seconds
     public var decisecondsRemaining: UInt
     
@@ -95,7 +96,7 @@ public class TENTimer {
     
     @objc private func tock() {
         decisecondsRemaining -= 1
-        delegate?.secondsRemaining = secondsRemaining
+        delegate?.timeRemaining = timeRemaining
         
         if decisecondsRemaining == 0 {
             state = .finished
