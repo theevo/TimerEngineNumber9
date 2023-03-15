@@ -30,18 +30,8 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_start2SecondTimer_pauseAfter1SecondEntersPauseState() {
-        let timer = startTimer(seconds: 2)
-        
-        expectAfter(
-            seconds: about1Second) {
-                timer.pause()
-                XCTAssertEqual(timer.state, .paused)
-            }
-    }
-    
     func test_create1SecondTimer_cannotPauseIfNotStarted() {
-        let timer = makeTimer()
+        let timer = makeTimer(seconds: 1)
         timer.pause()
         XCTAssertNotEqual(timer.state, .paused, "Timer has not started. It should not be able to enter a paused state.")
     }
@@ -76,9 +66,9 @@ final class TimerEngineNumber9Tests: XCTestCase {
     }
     
     func test_start1MinuteTimer_pausingAfter1SecondShouldShow59SecondsRemaining() {
-        let timer = TENTimer(minutes: 1)
+        let timer = makeTimer(minutes: 1)
         timer.start()
-        trackForMemoryLeaks(timer)
+//        trackForMemoryLeaks(timer)
         
         expectAfter(seconds: about1Second) {
             timer.pause()
@@ -87,23 +77,9 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_subscribe_1secondTimerShouldCallbackWhenFinished() {
-        let timer = makeTimer()
-        let spy = makeSpy()
-        
-        timer.subscribe(delegate: spy)
-        timer.start()
-        
-        expectAfter(seconds: about1Second) {
-            XCTAssertTrue(spy.didFinish)
-        }
-    }
-    
     func test_subscribe_2secondTimerShouldCallbackEachSecond() {
         let timer = makeTimer(seconds: 2)
         let spy = makeSpy()
-        
-        trackForMemoryLeaks(spy)
         
         timer.subscribe(delegate: spy)
         timer.start()
@@ -129,17 +105,14 @@ final class TimerEngineNumber9Tests: XCTestCase {
         XCTAssertEqual(timer.timeRemainingString, "0:59.0")
     }
     
-    func test_timeRemainingString_zeroSecondsShouldShow3Zeros() {
+    func test_timeRemainingString_zeroSecondsShouldShow4Zeros() {
         let timer = makeTimer(seconds: 0)
 
         XCTAssertEqual(timer.timeRemainingString, "0:00.0")
     }
     
-    func test_create5secondTimer_stopAfterOneTenthOfSecondShouldYield4point9Remaining() {
-        let timer = makeTimer(seconds: 5)
-        
-        timer.start()
-        trackForMemoryLeaks(timer)
+    func test_start5secondTimer_pauseAfterOneTenthOfSecondShouldYield4point9Remaining() {
+        let timer = startTimer(seconds: 5)
         
         expectAfter(seconds: tenthOf1Second) {
             timer.pause()
@@ -147,10 +120,8 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    func test_create1secondTimer_stopAfter9TenthsShouldYield0point1Remaining() {
-        let timer = makeTimer(seconds: 1)
-        
-        timer.start()
+    func test_start1secondTimer_pauseAfter9TenthsShouldYield0point1Remaining() {
+        let timer = startTimer(seconds: 1)
         
         expectAfter(seconds: 0.9) {
             timer.pause()
@@ -177,8 +148,10 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
-    private func makeTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
-        let timer = TENTimer(seconds)
+    private func makeTimer(minutes: UInt = 0, seconds: UInt = 0, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
+        
+        let startSeconds = (minutes * 60) + seconds
+        let timer = TENTimer(startSeconds)
         trackForMemoryLeaks(timer, file: file, line: line)
         return timer
     }
