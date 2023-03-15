@@ -120,19 +120,19 @@ final class TimerEngineNumber9Tests: XCTestCase {
     func test_timeRemainingString_secondsShouldHaveLeadingZero() {
         let timer = makeTimer(seconds: 69)
 
-        XCTAssertEqual(timer.timeRemainingString, "1:09")
+        XCTAssertEqual(timer.timeRemainingString, "1:09.0")
     }
     
     func test_timeRemainingString_minutesShouldShowZeroExplicitly() {
         let timer = makeTimer(seconds: 59)
 
-        XCTAssertEqual(timer.timeRemainingString, "0:59")
+        XCTAssertEqual(timer.timeRemainingString, "0:59.0")
     }
     
     func test_timeRemainingString_zeroSecondsShouldShow3Zeros() {
         let timer = makeTimer(seconds: 0)
 
-        XCTAssertEqual(timer.timeRemainingString, "0:00")
+        XCTAssertEqual(timer.timeRemainingString, "0:00.0")
     }
     
     // MARK: - Helpers

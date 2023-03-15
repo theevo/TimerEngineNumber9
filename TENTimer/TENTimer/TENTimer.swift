@@ -26,7 +26,7 @@ public class TENTimer {
         let minutes = timeRemaining / 60
         let seconds = timeRemaining % 60
         let leadingZero = seconds < 10 ? "0" : ""
-        return "\(minutes):\(leadingZero)\(seconds)"
+        return "\(minutes):\(leadingZero)\(seconds).0"
     }
     
     // MARK: - Private Properties
