@@ -14,7 +14,7 @@ final class TimerViewControllerTests: XCTestCase {
         let minutes: UInt = 7
         let sut = TimerViewController(minutes: minutes)
         sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.timeRemaining, minutes.seconds)
+        XCTAssertEqual(sut.timer.timeRemaining.minutes, 7)
     }
     
     func test_timerVC_containsOneButton() {
@@ -47,12 +47,12 @@ final class TimerViewControllerTests: XCTestCase {
         sut.playPauseButton.sendActions(for: .touchUpInside) // play
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59.0")
             sut.playPauseButton.sendActions(for: .touchUpInside) // pause
         }
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59.0")
         }
     }
     
@@ -80,12 +80,6 @@ final class TimerViewControllerTests: XCTestCase {
         } else {
             XCTFail("Delay interrupted")
         }
-    }
-}
-
-private extension UInt {
-    var seconds: UInt {
-        self * 60
     }
 }
 

@@ -12,15 +12,6 @@ class TimerViewController: UIViewController {
     
     var timer = TENTimer(minutes: 25)
     
-    var timeRemaining: UInt {
-        get {
-            timer.timeRemaining
-        }
-        set(newValue) {
-            countdownTimerLabel.text = timer.timeRemainingString
-        }
-    }
-    
     var playPauseButton = PlayPauseButton()
     
     var countdownTimerLabel = UILabel()
@@ -68,7 +59,7 @@ class TimerViewController: UIViewController {
         switch timer.state {
         case .notStarted, .paused:
             playPauseButton.toggle()
-            timer.start()
+            try! timer.start()
         case .started:
             playPauseButton.toggle()
             timer.pause()
@@ -80,6 +71,10 @@ class TimerViewController: UIViewController {
 }
 
 extension TimerViewController: TENTimerDelegate {
+    func timerTicked(timeLeft: (minutes: UInt, seconds: UInt, deciseconds: UInt)) {
+        countdownTimerLabel.text = timer.timeRemainingString
+    }
+    
     func didComplete() {
         print("timer finished")
     }
