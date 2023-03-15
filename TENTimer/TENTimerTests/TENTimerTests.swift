@@ -67,7 +67,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     func test_start1MinuteTimer_pausingAfter1SecondShouldShow59SecondsRemaining() {
         let timer = makeTimer(minutes: 1)
-        timer.start()
+        start(timer)
 //        trackForMemoryLeaks(timer)
         
         expectAfter(seconds: about1Second) {
@@ -82,7 +82,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         let spy = makeSpy()
         
         timer.subscribe(delegate: spy)
-        timer.start()
+        start(timer)
         
         expectAfter(seconds: about1Second) {
             XCTAssertEqual(spy.secondsRemaining, 1)
@@ -130,6 +130,19 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_start_throwsErrorIfTimerInitWithZeroSeconds() throws {
+        let timer = makeTimer(seconds: 0)
+        
+        do {
+            try timer.start()
+            
+            XCTFail("Expected error .cannotStartOnZero. No error was received.")
+        } catch let error {
+            XCTAssertEqual(error as! TENTimer.TimerError, TENTimer.TimerError.cannotStartOnZero)
+            XCTAssertEqual(timer.state, .notStarted)
+        }
+    }
+    
     // MARK: - Helpers
     
     let about1Second: TimeInterval = 1.05
@@ -158,8 +171,16 @@ final class TimerEngineNumber9Tests: XCTestCase {
     
     private func startTimer(seconds: UInt = 1, file: StaticString = #filePath, line: UInt = #line) -> TENTimer {
         let timer = makeTimer(seconds: seconds, file: file, line: line)
-        timer.start()
+        start(timer)
         return timer
+    }
+    
+    private func start(_ timer: TENTimer, file: StaticString = #filePath, line: UInt = #line) {
+        do {
+            try timer.start()
+        } catch let error {
+            XCTFail("Error when attempting to start timer: \(error)", file: file, line: line)
+        }
     }
     
     func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {

@@ -56,7 +56,13 @@ public class TENTimer {
         self.init(seconds)
     }
     
-    public func start() {
+    public enum TimerError: Error {
+        case cannotStartOnZero
+    }
+    
+    public func start() throws {
+        guard decisecondsRemaining > 0 else { throw TimerError.cannotStartOnZero }
+        
         state = .started
         tick()
         print("Starting \(ObjectIdentifier(self)) of \(seconds) seconds")
