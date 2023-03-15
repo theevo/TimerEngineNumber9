@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol TENTimerDelegate {
-    var timeRemaining: UInt { get set }
+    var secondsRemaining: UInt { get set }
     func didComplete()
 }
 
@@ -19,12 +19,17 @@ public class TENTimer {
     /// number of seconds set on this timer. remains constant even after timer has started.
     public let seconds: UInt
     public var state: State = .notStarted
-    /// time remaining in seconds. this value will update while the timer is counting down.
-    public var timeRemaining: UInt
+    /// time remaining in *tenths* of a second. this value will update while the timer is counting down. Ex: value of 60 = 6 seconds
+    public var decisecondsRemaining: UInt
+    
+    /// **warning**: this is not precise and will round to the nearest second
+    public var secondsRemaining: UInt {
+        decisecondsRemaining / 10
+    }
     
     public var timeRemainingString: String {
-        let minutes = timeRemaining / 60
-        let seconds = timeRemaining % 60
+        let minutes = secondsRemaining / 60
+        let seconds = secondsRemaining % 60
         let leadingZero = seconds < 10 ? "0" : ""
         return "\(minutes):\(leadingZero)\(seconds).0"
     }
@@ -35,6 +40,7 @@ public class TENTimer {
     
     private var delegate: TENTimerDelegate?
     private let oneSecond: Double = 1.0
+    private let tenthOf1Second: Double = 0.1
     private var ticker: Timer?
     
     
@@ -42,7 +48,7 @@ public class TENTimer {
     
     public init(_ seconds: UInt) {
         self.seconds = seconds
-        self.timeRemaining = seconds
+        self.decisecondsRemaining = seconds * 10
     }
     
     public convenience init(minutes: UInt) {
@@ -72,14 +78,14 @@ public class TENTimer {
     // MARK: - Private Methods
     
     private func tick() {
-        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
+        ticker = Timer.scheduledTimer(timeInterval: tenthOf1Second, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
     }
     
     @objc private func tock() {
-        timeRemaining -= 1
-        delegate?.timeRemaining = timeRemaining
+        decisecondsRemaining -= 1
+        delegate?.secondsRemaining = secondsRemaining
         
-        if timeRemaining == 0 {
+        if secondsRemaining == 0 {
             state = .finished
             delegate?.didComplete()
             ticker?.invalidate()

@@ -61,7 +61,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         expectAfter(seconds: about1Second) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
-            XCTAssertEqual(timer.timeRemaining, 1)
+            XCTAssertEqual(timer.secondsRemaining, 1)
         }
     }
     
@@ -71,7 +71,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         expectAfter(seconds: 2.05) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
-            XCTAssertEqual(timer.timeRemaining, 1)
+            XCTAssertEqual(timer.secondsRemaining, 1)
         }
     }
     
@@ -83,7 +83,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         expectAfter(seconds: about1Second) {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
-            XCTAssertEqual(timer.timeRemaining, 59)
+            XCTAssertEqual(timer.secondsRemaining, 59)
         }
     }
     
@@ -109,11 +109,11 @@ final class TimerEngineNumber9Tests: XCTestCase {
         timer.start()
         
         expectAfter(seconds: about1Second) {
-            XCTAssertEqual(spy.timeRemaining, 1)
+            XCTAssertEqual(spy.secondsRemaining, 1)
         }
         
         expectAfter(seconds: about1Second) {
-            XCTAssertEqual(spy.timeRemaining, 0)
+            XCTAssertEqual(spy.secondsRemaining, 0)
         }
     }
     
@@ -135,9 +135,22 @@ final class TimerEngineNumber9Tests: XCTestCase {
         XCTAssertEqual(timer.timeRemainingString, "0:00.0")
     }
     
+    func test_create5secondTimer_stopAfterOneTenthOfSecondShouldYield4point9Remaining() {
+        let timer = makeTimer(seconds: 5)
+        
+        timer.start()
+        trackForMemoryLeaks(timer)
+        
+        expectAfter(seconds: tenthOf1Second) {
+            timer.pause()
+            XCTAssertEqual(timer.decisecondsRemaining, 49)
+        }
+    }
+    
     // MARK: - Helpers
     
     let about1Second: TimeInterval = 1.05
+    let tenthOf1Second: TimeInterval = 0.1
     
     private func expectAfter(
         seconds timeout: TimeInterval,
@@ -179,7 +192,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
 
 private class TENTimerSpy: TENTimerDelegate {
     var didFinish = false
-    var timeRemaining: UInt = 2
+    var secondsRemaining: UInt = 2
     
     func didComplete() {
         didFinish = true
