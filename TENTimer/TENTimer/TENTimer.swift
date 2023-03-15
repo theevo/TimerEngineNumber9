@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol TENTimerDelegate {
-    var timeRemaining: UInt { get set }
+    var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) { get set }
     func didComplete()
 }
 
@@ -19,14 +19,26 @@ public class TENTimer {
     /// number of seconds set on this timer. remains constant even after timer has started.
     public let seconds: UInt
     public var state: State = .notStarted
-    /// time remaining in seconds. this value will update while the timer is counting down.
-    public var timeRemaining: UInt
+    
+    /// time remaining in *tenths* of a second. this value will update while the timer is counting down. Ex: value of 60 = 6 seconds
+    public var decisecondsRemaining: UInt
+    
+    /// **warning**: this is not precise and will round to the nearest second
+    public var secondsRemaining: UInt {
+        decisecondsRemaining / 10
+    }
+    
+    public var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) {
+        let minutes = decisecondsRemaining / 600
+        let seconds = (decisecondsRemaining % 600) / 10
+        let deciseconds = decisecondsRemaining % 10
+        return (minutes, seconds, deciseconds)
+    }
     
     public var timeRemainingString: String {
-        let minutes = timeRemaining / 60
-        let seconds = timeRemaining % 60
+        let (minutes, seconds, deciseconds) = timeRemaining
         let leadingZero = seconds < 10 ? "0" : ""
-        return "\(minutes):\(leadingZero)\(seconds)"
+        return "\(minutes):\(leadingZero)\(seconds).\(deciseconds)"
     }
     
     // MARK: - Private Properties
@@ -35,6 +47,7 @@ public class TENTimer {
     
     private var delegate: TENTimerDelegate?
     private let oneSecond: Double = 1.0
+    private let tenthOf1Second: Double = 0.1
     private var ticker: Timer?
     
     
@@ -42,7 +55,7 @@ public class TENTimer {
     
     public init(_ seconds: UInt) {
         self.seconds = seconds
-        self.timeRemaining = seconds
+        self.decisecondsRemaining = seconds * 10
     }
     
     public convenience init(minutes: UInt) {
@@ -50,7 +63,13 @@ public class TENTimer {
         self.init(seconds)
     }
     
-    public func start() {
+    public enum TimerError: Error {
+        case cannotStartOnZero
+    }
+    
+    public func start() throws {
+        guard decisecondsRemaining > 0 else { throw TimerError.cannotStartOnZero }
+        
         state = .started
         tick()
         print("Starting \(ObjectIdentifier(self)) of \(seconds) seconds")
@@ -72,14 +91,14 @@ public class TENTimer {
     // MARK: - Private Methods
     
     private func tick() {
-        ticker = Timer.scheduledTimer(timeInterval: oneSecond, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
+        ticker = Timer.scheduledTimer(timeInterval: tenthOf1Second, target: self, selector: #selector(tock), userInfo: nil, repeats: true)
     }
     
     @objc private func tock() {
-        timeRemaining -= 1
+        decisecondsRemaining -= 1
         delegate?.timeRemaining = timeRemaining
         
-        if timeRemaining == 0 {
+        if decisecondsRemaining == 0 {
             state = .finished
             delegate?.didComplete()
             ticker?.invalidate()
