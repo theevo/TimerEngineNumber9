@@ -85,11 +85,11 @@ final class TimerEngineNumber9Tests: XCTestCase {
         start(timer)
         
         expectAfter(seconds: about1Second) {
-            XCTAssertEqual(spy.timeRemaining.seconds, 1)
+            XCTAssertEqual(spy.secondsLeft, 1)
         }
         
         expectAfter(seconds: about1Second) {
-            XCTAssertEqual(spy.timeRemaining.seconds, 0)
+            XCTAssertEqual(spy.secondsLeft, 0)
         }
     }
     
@@ -200,7 +200,13 @@ final class TimerEngineNumber9Tests: XCTestCase {
 
 private class TENTimerSpy: TENTimerDelegate {
     var didFinish = false
-    var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) = (0, 0, 0)
+    var secondsLeft: UInt = 0
+    
+    func timerTicked(timeLeft: (minutes: UInt, seconds: UInt, deciseconds: UInt)) {
+        var seconds: UInt = timeLeft.minutes * 60
+        seconds += timeLeft.seconds
+        secondsLeft = seconds
+    }
     
     func didComplete() {
         didFinish = true

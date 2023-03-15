@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol TENTimerDelegate {
-    var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) { get set }
     func didComplete()
+    func timerTicked(timeLeft: (minutes: UInt, seconds: UInt, deciseconds: UInt))
 }
 
 public class TENTimer {
@@ -96,7 +96,7 @@ public class TENTimer {
     
     @objc private func tock() {
         decisecondsRemaining -= 1
-        delegate?.timeRemaining = timeRemaining
+        delegate?.timerTicked(timeLeft: timeRemaining)
         
         if decisecondsRemaining == 0 {
             state = .finished
