@@ -117,6 +117,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
         expectAfter(seconds: tenthOf1Second) {
             timer.pause()
             XCTAssertEqual(timer.decisecondsRemaining, 49)
+            XCTAssertEqual(timer.timeRemainingString, "0:04.9")
         }
     }
     
@@ -127,6 +128,7 @@ final class TimerEngineNumber9Tests: XCTestCase {
             timer.pause()
             XCTAssertEqual(timer.state, .paused)
             XCTAssertEqual(timer.decisecondsRemaining, 1)
+            XCTAssertEqual(timer.timeRemainingString, "0:00.1")
         }
     }
     

@@ -27,11 +27,17 @@ public class TENTimer {
         decisecondsRemaining / 10
     }
     
+    public var timeRemaining: (minutes: UInt, seconds: UInt, deciseconds: UInt) {
+        let minutes = decisecondsRemaining / 600
+        let seconds = (decisecondsRemaining % 600) / 10
+        let deciseconds = decisecondsRemaining % 10
+        return (minutes, seconds, deciseconds)
+    }
+    
     public var timeRemainingString: String {
-        let minutes = secondsRemaining / 60
-        let seconds = secondsRemaining % 60
+        let (minutes, seconds, deciseconds) = timeRemaining
         let leadingZero = seconds < 10 ? "0" : ""
-        return "\(minutes):\(leadingZero)\(seconds).0"
+        return "\(minutes):\(leadingZero)\(seconds).\(deciseconds)"
     }
     
     // MARK: - Private Properties
