@@ -85,7 +85,7 @@ public class TENTimer {
         decisecondsRemaining -= 1
         delegate?.secondsRemaining = secondsRemaining
         
-        if secondsRemaining == 0 {
+        if decisecondsRemaining == 0 {
             state = .finished
             delegate?.didComplete()
             ticker?.invalidate()

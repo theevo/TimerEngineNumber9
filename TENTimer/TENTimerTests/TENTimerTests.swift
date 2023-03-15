@@ -147,6 +147,18 @@ final class TimerEngineNumber9Tests: XCTestCase {
         }
     }
     
+    func test_create1secondTimer_stopAfter9TenthsShouldYield0point1Remaining() {
+        let timer = makeTimer(seconds: 1)
+        
+        timer.start()
+        
+        expectAfter(seconds: 0.9) {
+            timer.pause()
+            XCTAssertEqual(timer.state, .paused)
+            XCTAssertEqual(timer.decisecondsRemaining, 1)
+        }
+    }
+    
     // MARK: - Helpers
     
     let about1Second: TimeInterval = 1.05
