@@ -18,6 +18,7 @@ class PlayPauseButton: UIButton {
     init() {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        accessibilityLabel = "start pause button"
         updateView()
     }
     

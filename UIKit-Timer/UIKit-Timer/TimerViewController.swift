@@ -37,6 +37,7 @@ class TimerViewController: UIViewController {
         countdownTimerLabel.text = timer.timeRemainingString
         countdownTimerLabel.translatesAutoresizingMaskIntoConstraints = false
         countdownTimerLabel.font = UIFont.systemFont(ofSize: 75, weight: .regular)
+        countdownTimerLabel.accessibilityIdentifier = "time remaining"
         
         timer.subscribe(delegate: self)
         

@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC8A1DAA29C2F67E00B0488D /* PersistentTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */; };
+		AC8A1DAE29C2FF4700B0488D /* PersistentTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */; };
 		AC9FC90929C062C700AB228B /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FC90829C062C700AB228B /* PlayPauseButton.swift */; };
 		ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59129B72F8D002661B9 /* AppDelegate.swift */; };
 		ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */; };
 		ACA2F59929B72F8D002661B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59729B72F8D002661B9 /* Main.storyboard */; };
 		ACA2F59B29B72F8E002661B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59A29B72F8E002661B9 /* Assets.xcassets */; };
 		ACA2F59E29B72F8E002661B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA2F59C29B72F8E002661B9 /* LaunchScreen.storyboard */; };
-		ACA2F5B329B72F8E002661B9 /* UIKit_TimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5B229B72F8E002661B9 /* UIKit_TimerUITests.swift */; };
-		ACA2F5B529B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5B429B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift */; };
 		ACA2F5CB29B72FA5002661B9 /* TENTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA2F5C829B72FA1002661B9 /* TENTimer.framework */; };
 		ACA2F5CC29B72FA5002661B9 /* TENTimer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACA2F5C829B72FA1002661B9 /* TENTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ACA2F5D129B732A8002661B9 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F5D029B732A8002661B9 /* TimerViewController.swift */; };
@@ -79,8 +77,6 @@
 		ACA2F59F29B72F8E002661B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACA2F5A429B72F8E002661B9 /* UIKit-TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIKit-TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F5AE29B72F8E002661B9 /* UIKit-TimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIKit-TimerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACA2F5B229B72F8E002661B9 /* UIKit_TimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_TimerUITests.swift; sourceTree = "<group>"; };
-		ACA2F5B429B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_TimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ACA2F5C229B72FA1002661B9 /* TENTimer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TENTimer.xcodeproj; path = ../TENTimer/TENTimer.xcodeproj; sourceTree = "<group>"; };
 		ACA2F5D029B732A8002661B9 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewControllerTests.swift; sourceTree = "<group>"; };
@@ -152,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */,
-				AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */,
 			);
 			path = "UIKit-TimerTests";
 			sourceTree = "<group>";
@@ -160,8 +155,7 @@
 		ACA2F5B129B72F8E002661B9 /* UIKit-TimerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				ACA2F5B229B72F8E002661B9 /* UIKit_TimerUITests.swift */,
-				ACA2F5B429B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift */,
+				AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */,
 			);
 			path = "UIKit-TimerUITests";
 			sourceTree = "<group>";
@@ -350,7 +344,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC8A1DAA29C2F67E00B0488D /* PersistentTimerTests.swift in Sources */,
 				ACA2F5D329B732D1002661B9 /* TimerViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACA2F5B329B72F8E002661B9 /* UIKit_TimerUITests.swift in Sources */,
-				ACA2F5B529B72F8E002661B9 /* UIKit_TimerUITestsLaunchTests.swift in Sources */,
+				AC8A1DAE29C2FF4700B0488D /* PersistentTimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
