@@ -12,7 +12,7 @@ public protocol TENTimerDelegate {
     func timerTicked(timeLeft: (minutes: UInt, seconds: UInt, deciseconds: UInt))
 }
 
-public class TENTimer {
+open class TENTimer {
     
     // MARK: - Public Properties
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC8A1DAA29C2F67E00B0488D /* PersistentTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */; };
 		AC9FC90929C062C700AB228B /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FC90829C062C700AB228B /* PlayPauseButton.swift */; };
 		ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59129B72F8D002661B9 /* AppDelegate.swift */; };
 		ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentTimerTests.swift; sourceTree = "<group>"; };
 		AC9FC90829C062C700AB228B /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		ACA2F58E29B72F8D002661B9 /* UIKit-Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit-Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F59129B72F8D002661B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				ACA2F5D229B732D1002661B9 /* TimerViewControllerTests.swift */,
+				AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */,
 			);
 			path = "UIKit-TimerTests";
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8A1DAA29C2F67E00B0488D /* PersistentTimerTests.swift in Sources */,
 				ACA2F5D329B732D1002661B9 /* TimerViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
