@@ -36,9 +36,9 @@ open class TENTimer {
     }
     
     public var timeRemainingString: String {
-        let (minutes, seconds, deciseconds) = timeRemaining
+        let (minutes, seconds, _) = timeRemaining
         let leadingZero = seconds < 10 ? "0" : ""
-        return "\(minutes):\(leadingZero)\(seconds).\(deciseconds)"
+        return "\(minutes):\(leadingZero)\(seconds)"
     }
     
     // MARK: - Private Properties

@@ -47,12 +47,12 @@ final class TimerViewControllerTests: XCTestCase {
         sut.playPauseButton.sendActions(for: .touchUpInside) // play
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59.0")
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
             sut.playPauseButton.sendActions(for: .touchUpInside) // pause
         }
         
         expectAfter(seconds: TimerViewControllerTests.about1Second) {
-            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59.0")
+            XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
         }
     }
     
