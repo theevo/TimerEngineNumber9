@@ -22,15 +22,26 @@ final class PersistentTimerTests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        app.buttons.element(matching: .button, identifier: "start pause button").tap()
+        app.pressButton() // intent: start
         
         let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: 1)
+        let result = XCTWaiter.wait(for: [exp], timeout: about1Second)
         if result == XCTWaiter.Result.timedOut {
             let str = app.staticTexts.element(matching: .any, identifier: "time remaining").label
-            XCTAssertTrue(str.hasPrefix("24:58"), "Received \(str) instead")
+            XCTAssertTrue(str.hasPrefix("24:59"), "Received \(str) instead")
+            app.pressButton() // intent: pause
         } else {
             XCTFail("Delay interrupted")
         }
+    }
+    
+    // MARK: - Helpers
+    
+    let about1Second: TimeInterval = 0.85
+}
+
+fileprivate extension XCUIApplication {
+    func pressButton() {
+        self.buttons.element(matching: .button, identifier: "start pause button").tap()
     }
 }
