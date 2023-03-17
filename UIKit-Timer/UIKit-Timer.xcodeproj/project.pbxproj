@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC8A1DAE29C2FF4700B0488D /* PersistentTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */; };
+		AC8A1DB029C4766A00B0488D /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DAF29C4766A00B0488D /* XCTestCase+Extensions.swift */; };
+		AC8A1DB129C4767D00B0488D /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A1DAF29C4766A00B0488D /* XCTestCase+Extensions.swift */; };
 		AC9FC90929C062C700AB228B /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9FC90829C062C700AB228B /* PlayPauseButton.swift */; };
 		ACA2F59229B72F8D002661B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59129B72F8D002661B9 /* AppDelegate.swift */; };
 		ACA2F59429B72F8D002661B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA2F59329B72F8D002661B9 /* SceneDelegate.swift */; };
@@ -67,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		AC8A1DA929C2F67E00B0488D /* PersistentTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentTimerTests.swift; sourceTree = "<group>"; };
+		AC8A1DAF29C4766A00B0488D /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		AC9FC90829C062C700AB228B /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		ACA2F58E29B72F8D002661B9 /* UIKit-Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit-Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2F59129B72F8D002661B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,12 +111,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC8A1DB229C4769700B0488D /* UIKit-TimerTestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				AC8A1DAF29C4766A00B0488D /* XCTestCase+Extensions.swift */,
+			);
+			path = "UIKit-TimerTestHelpers";
+			sourceTree = "<group>";
+		};
 		ACA2F58529B72F8D002661B9 = {
 			isa = PBXGroup;
 			children = (
 				ACA2F59029B72F8D002661B9 /* UIKit-Timer */,
 				ACA2F5A729B72F8E002661B9 /* UIKit-TimerTests */,
 				ACA2F5B129B72F8E002661B9 /* UIKit-TimerUITests */,
+				AC8A1DB229C4769700B0488D /* UIKit-TimerTestHelpers */,
 				ACA2F58F29B72F8D002661B9 /* Products */,
 				ACA2F5C129B72FA1002661B9 /* Frameworks */,
 			);
@@ -344,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8A1DB029C4766A00B0488D /* XCTestCase+Extensions.swift in Sources */,
 				ACA2F5D329B732D1002661B9 /* TimerViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC8A1DB129C4767D00B0488D /* XCTestCase+Extensions.swift in Sources */,
 				AC8A1DAE29C2FF4700B0488D /* PersistentTimerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

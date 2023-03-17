@@ -24,14 +24,10 @@ final class PersistentTimerTests: XCTestCase {
         
         app.pressButton() // intent: start
         
-        let exp = expectation(description: "Test after 1 second")
-        let result = XCTWaiter.wait(for: [exp], timeout: about1Second)
-        if result == XCTWaiter.Result.timedOut {
+        expectAfter(seconds: about1Second) {
             let str = app.staticTexts.element(matching: .any, identifier: "time remaining").label
             XCTAssertTrue(str.hasPrefix("24:59"), "Received \(str) instead")
             app.pressButton() // intent: pause
-        } else {
-            XCTFail("Delay interrupted")
         }
     }
     

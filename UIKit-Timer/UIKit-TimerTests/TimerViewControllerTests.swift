@@ -46,40 +46,26 @@ final class TimerViewControllerTests: XCTestCase {
         
         sut.playPauseButton.sendActions(for: .touchUpInside) // play
         
-        expectAfter(seconds: TimerViewControllerTests.about1Second) {
+        expectAfter(seconds: about1Second) {
             XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
             sut.playPauseButton.sendActions(for: .touchUpInside) // pause
         }
         
-        expectAfter(seconds: TimerViewControllerTests.about1Second) {
+        expectAfter(seconds: about1Second) {
             XCTAssertEqual(sut.countdownTimerLabel.text, "24:59")
         }
     }
     
     // MARK: - Helpers
     
+    let about1Second: TimeInterval = 1.05
     let playImage = UIImage(systemName: PlayPauseButton.Icon.Play.rawValue)
     let pauseImage = UIImage(systemName: PlayPauseButton.Icon.Pause.rawValue)
-    
-    static let about1Second: TimeInterval = 1.05
     
     private func makeSUT() -> TimerViewController {
         let sut = TimerViewController()
         sut.loadViewIfNeeded()
         return sut
-    }
-    
-    private func expectAfter(
-        seconds timeout: TimeInterval = about1Second,
-        assertion: () -> Void
-    ) {
-        let exp = expectation(description: "Test after \(timeout) seconds")
-        let result = XCTWaiter.wait(for: [exp], timeout: timeout)
-        if result == XCTWaiter.Result.timedOut {
-            assertion()
-        } else {
-            XCTFail("Delay interrupted")
-        }
     }
 }
 
