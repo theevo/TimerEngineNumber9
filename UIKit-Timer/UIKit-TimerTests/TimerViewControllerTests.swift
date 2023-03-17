@@ -33,6 +33,8 @@ final class TimerViewControllerTests: XCTestCase {
     
     func test_timerVC_tapPlayPauseButtonOnceWillToggleFromPlayToPause() {
         let sut = makeSUT()
+        let playImage = UIImage(systemName: PlayPauseButton.Icon.Play.rawValue)
+        let pauseImage = UIImage(systemName: PlayPauseButton.Icon.Pause.rawValue)
         
         XCTAssertEqual(sut.playPauseButton.image, playImage)
         
@@ -59,8 +61,6 @@ final class TimerViewControllerTests: XCTestCase {
     // MARK: - Helpers
     
     let about1Second: TimeInterval = 1.05
-    let playImage = UIImage(systemName: PlayPauseButton.Icon.Play.rawValue)
-    let pauseImage = UIImage(systemName: PlayPauseButton.Icon.Pause.rawValue)
     
     private func makeSUT() -> TimerViewController {
         let sut = TimerViewController()
